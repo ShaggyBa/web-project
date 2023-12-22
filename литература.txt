@@ -1,1 +1,0 @@
-1. https://www.php.net/manual/ru/tutorial.php

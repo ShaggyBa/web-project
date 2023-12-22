@@ -5,8 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="./styles/reset.css">
-	<link rel="stylesheet" href="./styles/main.css">
+	<link rel="stylesheet" href="../styles/reset.css">
+	<link rel="stylesheet" href="../styles/main.css">
 	<title>Система библиотеки</title>
 </head>
 
@@ -23,13 +23,13 @@
 		<header>
 			<nav>
 				<ul>
-					<li><a href="index.php">Главная</a></li>
-					<li><a href="pages/books.php">Список книг</a></li>
+					<li><a href="../index.php">Главная</a></li>
+					<li><a href="books.php">Список книг</a></li>
 					<?php if ($_SESSION['role'] === 'librarian' || $_SESSION['role'] === 'administrator') : ?>
-						<li><a href="pages/notes.php">Записи</a></li>
+						<li><a href="notes.php">Записи</a></li>
 					<?php endif; ?>
 					<?php if ($_SESSION['role'] === 'administrator') : ?>
-						<li><a href="pages/users.php">Пользователи</a></li>
+						<li><a href="users.php">Пользователи</a></li>
 					<?php endif; ?>
 				</ul>
 			</nav>
@@ -46,13 +46,13 @@
 		<footer>
 			<nav>
 				<ul>
-					<li><a href="index.php">Главная</a></li>
-					<li><a href="pages/books.php">Список книг</a></li>
+					<li><a href="../index.php">Главная</a></li>
+					<li><a href="books.php">Список книг</a></li>
 					<?php if ($_SESSION['role'] === 'librarian' || $_SESSION['role'] === 'administrator') : ?>
-						<li><a href="pages/notes.php">Записи</a></li>
+						<li><a href="notes.php">Записи</a></li>
 					<?php endif; ?>
 					<?php if ($_SESSION['role'] === 'administrator') : ?>
-						<li><a href="pages/users.php">Пользователи</a></li>
+						<li><a href="users.php">Пользователи</a></li>
 					<?php endif; ?>
 				</ul>
 			</nav>
