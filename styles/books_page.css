@@ -1,0 +1,23 @@
+.books__menu {
+	margin-bottom: 20px;
+}
+
+.books__menu ul {
+	display: flex;
+}
+
+.books__menu li {
+	margin-right: 10px;
+}
+
+.books__menu a {
+	text-decoration: none;
+	color: #555454;
+	transition: color 0.3s ease;
+}
+
+.books__menu a:hover,
+.books__menu a:focus,
+.books__menu a:active {
+	color: #000;
+}

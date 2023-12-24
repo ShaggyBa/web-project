@@ -7,6 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="../styles/reset.css">
 	<link rel="stylesheet" href="../styles/main.css">
+	<link rel="stylesheet" href="../styles/books_page.css">
 	<title>Система библиотеки</title>
 </head>
 
@@ -58,6 +59,12 @@
 			</div>
 		</header>
 		<div class="container">
+			<div class="books__menu">
+				<ul>
+					<li><a href="./books/books_edit.php">Управление библиотекой</a></li>
+					<li><a href="./books/add_book.php">Быстрое добавление книги</a></li>
+				</ul>
+			</div>
 			<main>
 				<section>
 					<h2 class="title">Наша библиотека</h2>

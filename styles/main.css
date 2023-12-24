@@ -86,6 +86,13 @@ main {
 	padding: 20px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
+	width: 195px;
+	height: 432px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .book__image {

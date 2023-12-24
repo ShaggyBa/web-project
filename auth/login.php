@@ -7,6 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="../styles/reset.css">
 	<link rel="stylesheet" href="../styles/form.css">
+	<link rel="stylesheet" href="../styles/auth_form.css">
 
 	<title>Система библиотеки</title>
 </head>
