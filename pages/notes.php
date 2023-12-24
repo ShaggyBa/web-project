@@ -34,8 +34,18 @@
 				</ul>
 			</nav>
 			<div class="user-info">
-				<p><?php echo $_SESSION['user']; ?> (<?php echo $_SESSION['role']; ?>)</p>
-				<button onclick="location.href='functions/logout.php'">Выйти</button>
+				<p><?php echo $_SESSION['user']; ?>
+					(<?php
+						if ($_SESSION['role'] === 'librarian') {
+							echo 'Библиотекарь';
+						} elseif ($_SESSION['role'] === 'administrator') {
+							echo 'Администратор';
+						} else {
+							echo 'Читатель';
+						}
+						?>)
+				</p>
+				<button onclick="location.href='../functions/logout.php'">Выйти</button>
 			</div>
 		</header>
 		<div class="container">

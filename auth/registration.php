@@ -17,7 +17,7 @@
 			<form method="post" action="../functions/registrate.php">
 				<?php
 				if (isset($_GET['message']) && $_GET['message'] === 'user_exists') {
-					echo '<p>Данный пользователь уже существует!</p>';
+					echo '<p class="error">Данный пользователь уже существует!</p>';
 				}
 				?>
 				<p class="form-title">Регистрация</p>

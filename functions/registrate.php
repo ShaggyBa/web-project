@@ -13,7 +13,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['name'])
 	$result = mysqli_query($conn, $query);
 
 	if (mysqli_num_rows($result) === 0) {
-		$query = "INSERT INTO `users` (`name`, `login`, `password`, `role`) VALUES ('$name', '$login', '$password', 'librarian')";
+		$query = "INSERT INTO `users` (`name`, `login`, `password`, `role`) VALUES ('$name', '$login', '$password', 'reader')";
 		$result = mysqli_query($conn, $query);
 
 		if ($result) {

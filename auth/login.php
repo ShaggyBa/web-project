@@ -29,7 +29,7 @@
 					<label for="login" class="form-field__label">Пароль</label>
 				</div>
 				<div class="form-field">
-					<input type="checkbox" name="remember" id="remember" required>
+					<input type="checkbox" name="remember" id="remember">
 					<label for="remember">Запомнить меня</label>
 				</div>
 				<div class="form-field">
@@ -41,9 +41,9 @@
 
 			<?php
 			if (isset($_GET['message']) && $_GET['message'] === 'success') {
-				echo '<p>Регистрация прошла успешно! Выполните вход.</p>';
+				echo '<p class="success">Регистрация прошла успешно! Выполните вход.</p>';
 			} else if (isset($_GET['message']) && $_GET['message'] === 'error') {
-				echo '<p>Ошибка авторизации. Попробуйте еще раз.</p>';
+				echo '<p class="error">Ошибка авторизации. Попробуйте еще раз.</p>';
 			}
 			?>
 		</div>

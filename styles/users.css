@@ -1,0 +1,40 @@
+.users {
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.users__title {
+	margin: 20px 0;
+	font-size: 24px;
+}
+
+.users__table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.users__table th,
+.users__table td {
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.users__table th {
+	background-color: #f2f2f2;
+	font-weight: bold;
+	text-align: left;
+}
+
+.users__table tbody .users__row:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+.users__table tbody .users__row:hover {
+	background-color: #e6e6e6;
+}
+
+.role__select {
+	margin-left: 20px;
+}

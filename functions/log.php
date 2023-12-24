@@ -13,7 +13,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['name'])
 	$result = mysqli_query($conn, $query);
 
 
-	if ($result) {
+	if ($result && mysqli_num_rows($result) > 0) {
 		session_start();
 
 		$role = mysqli_fetch_assoc($result)['role'];
