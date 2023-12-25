@@ -18,6 +18,11 @@
 		header('Location: auth/login.php');
 		exit;
 	}
+
+	if ($_SESSION['role'] !== 'administrator' && $_SESSION['role'] !== 'librarian') {
+		header('Location: ../index.php');
+		exit;
+	}
 	?>
 	<div class="wrapper">
 		<header>

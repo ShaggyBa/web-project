@@ -7,7 +7,8 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="../styles/reset.css">
 	<link rel="stylesheet" href="../styles/main.css">
-	<link rel="stylesheet" href="../styles/users.css">
+	<link rel="stylesheet" href="../styles/table.css">
+	<link rel="stylesheet" href="../styles/users_page.css">
 	<title>Система библиотеки</title>
 </head>
 
@@ -19,6 +20,12 @@
 		header('Location: auth/login.php');
 		exit;
 	}
+
+	if ($_SESSION['role'] !== 'administrator') {
+		header('Location: ../index.php');
+		exit;
+	}
+
 	?>
 	<div class="wrapper">
 		<header>
@@ -51,9 +58,9 @@
 		</header>
 		<div class="container">
 			<main class="users">
-				<p class="users__title">Список пользователей</p>
+				<h2 class="title">Список пользователей</h2>
 
-				<table class="users__table">
+				<table class="table">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -69,7 +76,7 @@
 						$query = "SELECT id, name, role FROM users WHERE role != 'administrator'";
 
 						foreach ($conn->query($query) as $row) {
-							echo '<tr class="users__row" data-id="' . $row['id'] . '">';
+							echo '<tr class="table__row" data-id="' . $row['id'] . '">';
 							echo '<td>' . $row['id'] . '</td>';
 							echo '<td>' . $row['name'] . '</td>';
 							echo '<td class="role__value">';

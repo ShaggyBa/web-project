@@ -72,6 +72,9 @@
 								<p class="book__count"><?php echo $row['count']; ?> шт. </p>
 								<button onclick="location.href='pages/book.php?id=<?php echo $row['id']; ?>">Арендовать</button>
 
+								<!-- <?php if ($_SESSION['role'] === 'reader') : ?>
+									<button onclick="location.href='pages/book.php?id=<?php echo $row['id']; ?>">Арендовать</button>
+								<?php endif; ?> -->
 							</div>
 						<?php endwhile; ?>
 					</div>

@@ -48,10 +48,14 @@ form {
 	border-color: #333;
 }
 
+.form-field input:not(:empty)+.form-field__label,
+.form-field textarea:not(:empty)+.form-field__label,
 .form-field input:focus+.form-field__label,
 .form-field textarea:focus+.form-field__label,
 .form-field input:valid+.form-field__label,
-.form-field textarea:valid+.form-field__label {
+.form-field textarea:valid+.form-field__label,
+.form-field input:read-only+.form-field__label,
+.form-field textarea:read-only+.form-field__label {
 	top: -15px;
 	left: 5px;
 	font-size: 12px;
