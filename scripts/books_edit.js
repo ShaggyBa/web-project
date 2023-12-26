@@ -1,80 +1,3 @@
-function editBook(button) {
-	const row = button.parentNode.parentNode;
-
-	const bookNameCells = row.querySelectorAll('td[data-edit=true]');
-
-	const editButton = button
-
-	const deleteButton = button.nextElementSibling
-
-	const submitButton = document.createElement('button');
-	submitButton.textContent = 'Сохранить';
-	submitButton.addEventListener('click', () => {
-		console.log('Сохранить');
-		changeStateOfButtons();
-	})
-
-	const cancelButton = document.createElement('button');
-	cancelButton.textContent = 'Отмена';
-	cancelButton.addEventListener('click', () => {
-		console.log('Отмена');
-		changeStateOfButtons();
-	})
-
-
-	bookNameCells.forEach((cell) => {
-		const input = document.createElement('input');
-		input.type = 'text';
-		input.value = cell.textContent;
-		cell.innerHTML = ''; // Очистите содержимое ячейки
-		cell.appendChild(input);
-	});
-
-	changeStateOfButtons(editButton, deleteButton);
-
-	function changeStateOfButtons(editButton, deleteButton) {
-		if (editButton.textContent === 'Изменить' && deleteButton.textContent === 'Удалить') {
-			editButton.innerHTML = '';
-			deleteButton.innerHTML = '';
-
-			editButton.appendChild(submitButton);
-			deleteButton.appendChild(cancelButton);
-		}
-		else {
-			editButton.innerHTML = 'Изменить';
-			deleteButton.innerHTML = 'Удалить';
-		}
-	}
-
-
-	// Отправка данных на сервер с помощью fetch-запроса
-	// fetch("../api/update_role.php", {
-	// 	method: "POST",
-	// 	headers: {
-	// 		"Content-Type": "application/json"
-	// 	},
-	// 	body: JSON.stringify({ id: id, role: roleSelect })
-	// })
-	// 	.then(response => response.text())
-	// 	.then(data => {
-	// 		// Обработка ответа от сервера
-	// 		console.log(data); // Вывод ответа в консоль
-
-	// 		switch (roleSelect) {
-	// 			case ("librarian"):
-	// 				row.querySelector(".role__value > span").textContent = "Библиотекарь";
-	// 				break;
-	// 			case ("reader"):
-	// 				row.querySelector(".role__value > span").textContent = "Читатель";
-	// 				break;
-	// 		}
-	// 	})
-	// 	.catch(error => {
-	// 		// Обработка ошибок
-	// 		console.error(error);
-	// 	});
-}
-
 function addBook(button) {
 	const row = button.closest('tr');
 	const bookName = row.querySelector('.book__name--input');
@@ -141,10 +64,38 @@ function addBook(button) {
 		});
 }
 
-const modal = document.getElementById("deleteModal");
+const deleteModal = document.getElementById("deleteModal");
+
+const editModal = document.getElementById("editModal");
+
+const editForm = document.getElementById("editForm");
+
+function onEditBook(button) {
+	const row = button.closest('.table__row');
+	const bookId = row.getAttribute('data-id');
+	const bookName = row.querySelector('.book__name').innerText;
+	const author = row.querySelector('.book__author').innerText;
+	const count = row.querySelector('.book__count').innerText;
+	const image = row.querySelector('.book__image').innerText;
+
+	editForm.querySelector('.book__name').value = bookName;
+	editForm.querySelector('.book__author').value = author;
+	editForm.querySelector('.book__count').value = count;
+	editForm.querySelector('.book__image').value = image;
+
+	editForm.querySelector('#bookId').value = bookId;
+
+	confirmModal(editModal, editBook, button, editForm);
+
+
+}
 
 function onDeleteBook(button) {
-	confirmModal(modal, deleteBook, button);
+	confirmModal(deleteModal, deleteBook, button);
+}
+
+function editBook(button, editForm) {
+	console.log(editBook)
 }
 
 function deleteBook(button) {
@@ -161,7 +112,7 @@ function deleteBook(button) {
 		.then(response => response.text())
 		.then(data => {
 			// Обработка ответа от сервера
-			closeModal(modal);
+			closeModal(deleteModal);
 			// Удаление строки из таблицы
 			row.remove();
 		})
@@ -172,18 +123,18 @@ function deleteBook(button) {
 }
 
 function confirmModal(modal, func, ...args) {
-	const confirmDeleteBtn = modal.querySelector("#confirmDeleteBtn");
+	const confirmBtn = modal.querySelector("#confirmBtn");
+	if (confirmBtn) {
+		confirmBtn.addEventListener("click", () => {
+			func(...args);
+		});
+	}
 
-	confirmDeleteBtn.addEventListener("click", () => func(...args));
-
-	// Обработчик события клика на крестик модального окна
 	const closeBtn = modal.querySelector(".close");
-	closeBtn.addEventListener("click", function () {
-		// Закрываем модальное окно
-		modal.style.display = "none";
+	closeBtn.addEventListener("click", function (event) {
+		closeModal(event.target.parentNode.parentNode);
 	});
 	openModal(modal);
-
 }
 
 function openModal(modal) {

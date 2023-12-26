@@ -61,12 +61,14 @@
 			</div>
 		</header>
 		<div class="container">
-			<div class="books__menu">
-				<ul>
-					<li><a href="./books/books_edit.php">Управление книгами</a></li>
-					<li><a href="./books/add_book.php">Быстрое добавление книги</a></li>
-				</ul>
-			</div>
+			<?php if ($_SESSION['role'] === 'librarian' || $_SESSION['role'] === 'administrator') : ?>
+				<div class="books__menu">
+					<ul>
+						<li><a href="./books/books_edit.php">Управление книгами</a></li>
+						<li><a href="./books/add_book.php">Быстрое добавление книги</a></li>
+					</ul>
+				</div>
+			<?php endif; ?>
 			<main>
 				<section>
 					<h2 class="title">Наша библиотека</h2>

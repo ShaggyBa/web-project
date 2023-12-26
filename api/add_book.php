@@ -26,12 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$result = $conn->query($query);
 
 			if ($result->num_rows > 0) {
-				echo json_encode($result->fetch_assoc());
+				$success_message = "book_added";
+				$url = "..?" . http_build_query(['success_message' => $success_message]);
+				header('Location: ' . $url);
 			} else {
-				echo json_encode([]); // возвращаем пустой JSON-объект
+				$error_message = "error_adding_book";
+				$url = "..?" . http_build_query(['success_message' => $error_message]);
+				header('Location: ' . $url);
 			}
 		} else {
-			echo json_encode(['error' => 'Произошла ошибка при добавлении книги']);
+			$error_message = "error_post_request";
+			$url = "..?" . http_build_query(['success_message' => $error_message]);
+			header('Location: ' . $url);
 		}
 	} else {
 		//POST запрос с JSON

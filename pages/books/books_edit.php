@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="../../styles/books_edit.css">
 	<link rel="stylesheet" href="../../styles/table.css">
 	<link rel="stylesheet" href="../../styles/modal.css">
+	<link rel="stylesheet" href="../../styles/form.css">
 	<title>Система библиотеки - Добавление книги</title>
 </head>
 
@@ -87,13 +88,13 @@
 						foreach ($conn->query($query) as $row) {
 							echo '<tr class="table__row" data-id="' . $row['id'] . '">';
 							echo '<td>' . $row['id'] . '</td>';
-							echo '<td data-edit=true>' . $row['book_name'] . '</td>';
-							echo '<td data-edit=true>' . $row['author'] . '</td>';
-							echo '<td data-edit=true>' . $row['count'] . '</td>';
-							echo '<td data-edit=true>' . $row['image'] . '</td>';
+							echo '<td class="book__name" data-edit=true>' . $row['book_name'] . '</td>';
+							echo '<td class="book__author" data-edit=true>' . $row['author'] . '</td>';
+							echo '<td class="book__count" data-edit=true>' . $row['count'] . '</td>';
+							echo '<td class="book__image" data-edit=true>' . $row['image'] . '</td>';
 							echo '<td class="table__actions">';
 
-							echo '<button onclick="editBook(this)">Изменить</button>';
+							echo '<button onclick="onEditBook(this)">Изменить</button>';
 
 							echo '<button onclick="onDeleteBook(this)">Удалить</button>';
 							echo '</td>';
@@ -119,9 +120,39 @@
 				<span class="close">&times;</span>
 				<h2 class="title">Подтверждение удаления</h2>
 				<p>Вы действительно хотите удалить эту книгу?</p>
-				<button id="confirmDeleteBtn">Удалить</button>
+				<button id="confirmBtn">Удалить</button>
 			</div>
 		</div>
+		<!-- Модальное окно редактирования записи -->
+		<div id="editModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2 class="title">Изменение книги</h2>
+				<form id="editForm" action="../../api/update_book.php" method="POST">
+					<div class="form-field">
+						<input type="text" class="book__name" name="book_name" required>
+						<label for="bookName" class="form-field__label">Название книги:</label>
+
+					</div>
+					<div class="form-field">
+						<input type="text" class="book__author" id="author" name="author" required>
+						<label for="author" class="form-field__label">Автор:</label>
+
+					</div>
+					<div class="form-field">
+						<input type="number" class="book__count" id="count" name="count" required>
+						<label for="count" class="form-field__label">Количество:</label>
+					</div>
+					<div class="form-field">
+						<input type="text" class="book__image" id="image" name="image" required>
+						<label for="image" class="form-field__label">Изображение:</label>
+					</div>
+					<input type="hidden" name="book_id" id="bookId">
+					<button type="submit" id="confirmBtn">Сохранить</button>
+				</form>
+			</div>
+		</div>
+
 		<footer>
 			<nav>
 				<ul>

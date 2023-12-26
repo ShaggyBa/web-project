@@ -30,7 +30,7 @@
 	cursor: pointer;
 }
 
-#confirmDeleteBtn {
+#confirmBtn {
 	background-color: red;
 	color: white;
 	padding: 10px 20px;
@@ -39,6 +39,6 @@
 	margin-top: 15px;
 }
 
-#confirmDeleteBtn:hover {
+#confirmBtn:hover {
 	background-color: darkred;
 }

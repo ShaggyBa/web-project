@@ -1,8 +1,11 @@
 <?php
 $server_name = "localhost";
-$user = "shaggyba"; // $user = "root";
-$password = "321654987s";  // $password = ""; 
-$db = "web_project"; //  $db = "web-project";
+// $user = "root"; 
+$user = "shaggyba";
+// $password = ""; 
+$password = "321654987s";
+// $db = "web-project"; 
+$db = "web_project";
 
 $conn = new mysqli($server_name, $user, $password, $db);
 
