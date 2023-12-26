@@ -7,6 +7,8 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="../styles/reset.css">
 	<link rel="stylesheet" href="../styles/main.css">
+	<link rel="stylesheet" href="../styles/table.css">
+	<link rel="stylesheet" href="../styles/notes_page.css">
 	<title>Система библиотеки</title>
 </head>
 
@@ -54,8 +56,44 @@
 			</div>
 		</header>
 		<div class="container">
-			<main>
-				<!-- Ваша основная контентная часть -->
+			<main class="notes">
+				<h2 class="title">Записи библиотеки</h2>
+
+				<table class="table">
+					<thead>
+						<tr>
+
+							<th>ID</th>
+							<th>ID читателя</th>
+							<th>Имя читателя</th>
+							<th>ID книги</th>
+							<th>Дата</th>
+							<th>Период взятия</th>
+							<th>Ответственное лицо</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						include_once '../functions/connect.php';
+
+						$query = "SELECT * FROM notes";
+
+						foreach ($conn->query($query) as $row) {
+
+							echo "<tr>";
+							echo "<td>" . $row['id'] . "</td>";
+							echo "<td>" . $row['reader_id'] . "</td>";
+							echo "<td>" . $row['reader_name'] . "</td>";
+							echo "<td>" . $row['book_id'] . "</td>";
+							echo "<td>" . $row['date'] . "</td>";
+							echo "<td>" . $row['collection_period'] . "</td>";
+							echo "<td>" . $row['responsible_id'] . "</td>";
+							echo "</tr>";
+						}
+						?>
+					</tbody>
+				</table>
 			</main>
 		</div>
 		<footer>

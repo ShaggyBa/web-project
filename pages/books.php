@@ -27,11 +27,6 @@
 		exit;
 	}
 
-	if ($_SESSION['role'] !== 'administrator' && $_SESSION['role'] !== 'librarian') {
-		header('Location: ../index.php');
-		exit;
-	}
-
 	$query = "SELECT * FROM books";
 	$result = $conn->query($query);
 
@@ -77,17 +72,19 @@
 					<h2 class="title">Наша библиотека</h2>
 					<div class="books">
 						<?php while ($row = $result->fetch_assoc()) : ?>
+							<?php if ($row['count'] == 0) continue; ?>
 							<div class="book" data-book-id="<?php echo $row['id']; ?>">
 								<img class="book__image" src="<?php echo $row['image']; ?>" />
 								<p class="book__title"><?php echo $row['book_name']; ?> </p>
 								<p class="book__author"><?php echo $row['author']; ?></p>
 								<p class="book__count"><?php echo $row['count']; ?> шт. </p>
-								<button onclick="openModal('<?php echo $row['id']; ?>', '<?php echo $_SESSION['user']; ?>')">
-									Арендовать</button>
 
-								<!-- <?php if ($_SESSION['role'] === 'reader') : ?>
-									<button onclick="location.href='pages/book.php?id=<?php echo $row['id']; ?>">Арендовать</button>
-								<?php endif; ?> -->
+
+								<?php if ($_SESSION['role'] === 'reader') : ?>
+									<button onclick="openModal('<?php echo $row['id']; ?>', '<?php echo $_SESSION['user']; ?>')">
+										Арендовать
+									</button>
+								<?php endif; ?>
 							</div>
 						<?php endwhile; ?>
 					</div>
@@ -113,31 +110,44 @@
 			<div class="modal-content">
 				<span class="close" onclick="closeModal()">&times;</span>
 				<h2 class="title">Аренда книги</h2>
-				<form id="rentForm" action="../api/add_note.php">
-					<div class="form-field">
-						<textarea id="bookInfo" readonly></textarea>
-						<label for="bookInfo" class="form-field__label">Сведения о книге:</label>
+				<form id="rentForm" action="../api/add_note.php" method="POST">
+
+					<div class="bookInfo">
+						<img class="book__image" src="" />
+						<p class="book__title"></p>
+						<p class="book__author"></p>
+						<input type="hidden" name="book_id" id="bookId">
 					</div>
+					<hr>
 					<div class="form-field">
-						<input type="text" id="name" readonly>
+						<input type="text" name="reader_name" id="name" readonly>
 						<label for="name" class="form-field__label">Имя:</label>
 					</div>
 					<div class="form-field">
-						<input type="text" id="rentDate" pattern="\d{2}.\d{2}.\d{4}" required>
+						<input type="text" name="rent_date" id="rentDate" readonly>
 						<label for="rentDate" class="form-field__label">Дата аренды:</label>
-
 					</div>
 					<div class="form-field">
-						<input type="number" id="rentDuration" min="1" max="60" required>
+						<input type="text" id="rentDuration" name="collection_period" maxlength="2" pattern="[0-9]+" required>
 						<label for="rentDuration" class="form-field__label">Срок аренды (в днях):</label>
 
 					</div>
 					<div class="form-field">
-						<select id="librarian" required>
-							<option value="">Выберите библиотекаря</option>
-							<!-- Здесь можно динамически добавить варианты из пользователей с ролью библиотекаря -->
+						<label for="librarian">Библиотекарь:</label>
+
+						<select id="librarian" name="responsible_id" required>
+							<?php
+							$query = "SELECT * FROM users WHERE role = 'librarian'";
+							$result = $conn->query($query);
+							if ($result->num_rows > 0) {
+								while ($row = $result->fetch_assoc()) {
+									echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+								}
+							} else {
+								echo "<option value=''>Нет свободных библиотекарей</option>";
+							}
+							?>
 						</select>
-						<label for="librarian" class="form-field__label">Библиотекарь:</label>
 
 					</div>
 					<button type="submit">Арендовать</button>

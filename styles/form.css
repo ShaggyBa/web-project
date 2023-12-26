@@ -62,6 +62,11 @@ form {
 	color: #333;
 }
 
+.form-field input:read-only {
+	opacity: .65;
+
+}
+
 form button[type="submit"] {
 	background-color: #333;
 	color: #fff;
